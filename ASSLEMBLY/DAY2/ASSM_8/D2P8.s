@@ -1,0 +1,17 @@
+    AREA MYCODE,CODE,READONLY
+	ENTRY
+	EXPORT start
+		
+start PROC
+	MOV32 R0, #0xFFFF1234
+	MOV32 R1, #0xFFFF1234
+	
+	CMP R0, R1
+	IT EQ
+	MOVEQ R0, #0
+	
+	
+	B .
+	ENDP
+	END
+      	

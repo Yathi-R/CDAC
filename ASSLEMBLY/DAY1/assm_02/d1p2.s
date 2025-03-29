@@ -1,0 +1,29 @@
+	AREA MYCODE1,CODE,READONLY
+	ENTRY
+	EXPORT start
+		
+start PROC
+	MOV R0, #0x2300
+	MOV R1, #0xAACD
+	
+	ADD R0, R1
+	
+	MOV R2, #0xAADB
+	MOV R3, #0x8567
+	
+	SUB R2, R3
+	
+	MOV R4, #0xAAAB
+	MOV R5, #0x8544
+	
+	MUL R6, R4, R5
+	
+	MOV R7, #0xAABC
+	MOV R8, #0x8555
+	
+	SDIV R9, R7, R8
+	
+	B .
+	
+	ENDP
+	END

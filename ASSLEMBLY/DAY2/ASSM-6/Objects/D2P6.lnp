@@ -1,0 +1,7 @@
+--cpu=Cortex-M4.fp.sp
+".\objects\d2p6.o"
+".\objects\startup_stm32f407.o"
+--library_type=microlib --strict --scatter "..\ASS-6\linker.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\D2P6.map" -o .\Objects\D2P6.axf

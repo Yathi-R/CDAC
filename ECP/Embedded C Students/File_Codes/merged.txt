@@ -1,0 +1,12 @@
+
+--- Start of file1.txt ---
+bhumika1
+--- End of file1.txt ---
+
+--- Start of file2.txt ---
+Bhumika 2
+--- End of file2.txt ---
+
+--- Start of file3.txt ---
+hiiiiiii
+--- End of file3.txt ---

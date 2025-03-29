@@ -1,0 +1,30 @@
+Hi hello!. This is writting text to append to the file names output.txt file!
+\n second append to this file...
+Hi, Hello.
+
+Welcome to CDAC Bangalore.
+
+You have successfully opened a file!
+
+Congrats....
+Hi, Hello.
+
+Welcome to CDAC Bangalore.
+
+You have successfully opened a file!
+
+Congrats....
+Hi, Hello.
+
+Welcome to CDAC Bangalore.
+
+You have successfully opened a file!
+
+Congrats....
+Hi, Hello.
+
+Welcome to CDAC Bangalore.
+
+You have successfully opened a file!
+
+Congrats....
