@@ -1,0 +1,1 @@
+sudo /usr/bin/vmhgfs-fuse .host:/ /home/Yathi -o subtype=nmhgfs-fuse,allow_other
