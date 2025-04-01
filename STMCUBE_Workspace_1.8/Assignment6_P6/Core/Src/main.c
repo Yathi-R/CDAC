@@ -58,34 +58,46 @@ static void MX_TIM3_Init(void);
 /* USER CODE BEGIN 0 */
 uint16_t brightness = 0;
 
+//Function to invoke Interrupt to get button press
 void EXTI_IRQHandler(uint16_t GPIO_Pin){
-	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6);
-	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_7);
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6); //Handles Button 2
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_7); //handles Button 1
 
 }
+
+//Interrupt Call back function to read button press and alter LED brightness
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 
-		if( GPIO_Pin == GPIO_PIN_7) {
+		//each press of a pushbutton 1 increases LED brightness
+		if( GPIO_Pin == GPIO_PIN_7) { //checks if button 1 is pressed
+
+			//condition to check and limit MAX brightness
 			if (brightness >10000){
-				brightness -= 10000;
-				__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness);
+				brightness -= 10000; // Increases LED brightness
+				__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness); //Sets LED brightness
 			}
+			// Sets MAX brightness
 			else{
 				brightness = 0;
 				__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness);
 			}
 		}
-		if(GPIO_Pin == GPIO_PIN_6){
+
+		//each press of a pushbutton 2 decreases LED brightness.
+		if(GPIO_Pin == GPIO_PIN_6){ //checks if button 2 is pressed
+
+			//condition to check and limit Lowest brightness
 			if(brightness < 55535){
-				brightness += 10000;
-				__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness);
+				brightness += 10000; //Decreases LED brightness
+				__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness); //Sets LED brightness
 				}
+			// Sets Lowest brightness
 			else{
 				brightness = 65535;
 				__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness);
 			}
 		}
-		EXTI_IRQHandler(GPIO_Pin);
+		EXTI_IRQHandler(GPIO_Pin); //Function call to invoke Interrupt
 }
 /* USER CODE END 0 */
 

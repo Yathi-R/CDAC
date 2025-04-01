@@ -55,18 +55,23 @@ static void MX_GPIO_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+//Interrupt callback function to read Button pressed state
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 
 	while(1){
+
+	//if button 1 is pressed, turns ON Green LED and Turns OFF Red LED
 	if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7) == 0){
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 1);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 0); //Turns ON Green LED
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 1); //Turns OFF RED LED
 	}
+
+	//if button 1 is not pressed, turns OFF Green LED and Turns ON Red LED
 	if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7) == 1){
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 1);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 0); //Turns ON Red LED
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 1); //Turns OFF Green LED
 	}
-	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_7);
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_7); // calls interrupt to check Button 1 status
 	}
 }
 
@@ -102,6 +107,8 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+
+  //default RED LED to be ON
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 0);
   /* USER CODE END 2 */
 
@@ -110,6 +117,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -163,8 +171,8 @@ void SystemClock_Config(void)
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-/* USER CODE BEGIN MX_GPIO_Init_1 */
-/* USER CODE END MX_GPIO_Init_1 */
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
+  /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -189,8 +197,8 @@ static void MX_GPIO_Init(void)
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
-/* USER CODE BEGIN MX_GPIO_Init_2 */
-/* USER CODE END MX_GPIO_Init_2 */
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
+  /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */

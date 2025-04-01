@@ -59,36 +59,46 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+//Function to call IRQ based on button pressed
 void EXTI9_5_IRQnHandler(void)
 {
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6); // Handle PB6
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_7); // Handle PB7
 }
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-	HAL_TIM_Base_Start(&htim3);
 
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+	HAL_TIM_Base_Start(&htim3); //starts TIMER 3
+
+	//below indicated if Button 1 is pressed using transmit
 	if (GPIO_Pin == GPIO_PIN_7){
 		HAL_UART_Transmit(&huart1, (uint8_t*)"Button 1 pressed \r\n", sizeof ("Button 1 pressed \r\n"), 100);
-	}else if(GPIO_Pin == GPIO_PIN_6){
+	}
+	//below indicated if Button 2 is pressed using transmit
+	else if(GPIO_Pin == GPIO_PIN_6){
 		HAL_UART_Transmit(&huart1, (uint8_t*)"Button 2 pressed \r\n", sizeof ("Button 2 pressed \r\n"), 100);
 	}
 
 	while(1){
+
+	//if button 1 is pressed, both LED’s toggle continuously with 1 second delay.
 	if (GPIO_Pin == GPIO_PIN_7){
 		if (__HAL_TIM_GET_COUNTER(&htim3) >= 1000) // If 1000ms elapsed since last reset
 		{
-		   HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1 | GPIO_PIN_2);
+		   HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1 | GPIO_PIN_2); // toggles both led
 		   __HAL_TIM_SET_COUNTER(&htim3, 0); // Reset counter
 		}
 	}
+
+	//if button 2 is pressed, both LED’s toggle continuously with 0.5 second delay.
 	if (GPIO_Pin == GPIO_PIN_6){
 		if (__HAL_TIM_GET_COUNTER(&htim3) >= 500) // If 500ms elapsed since last reset
 		{
-		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1 | GPIO_PIN_2);
+		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1 | GPIO_PIN_2); //toggles both led
 		__HAL_TIM_SET_COUNTER(&htim3, 0); // Reset counter
 		}
 	}
-	EXTI9_5_IRQnHandler();
+	EXTI9_5_IRQnHandler(); // Function call to get next button pressed
 	}
 }
 
@@ -281,8 +291,8 @@ static void MX_USART1_UART_Init(void)
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-/* USER CODE BEGIN MX_GPIO_Init_1 */
-/* USER CODE END MX_GPIO_Init_1 */
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
+  /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
@@ -309,8 +319,8 @@ static void MX_GPIO_Init(void)
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
-/* USER CODE BEGIN MX_GPIO_Init_2 */
-/* USER CODE END MX_GPIO_Init_2 */
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
+  /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */

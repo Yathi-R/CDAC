@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (12.3.rel1)
+# Toolchain: GNU Tools for STM32 (13.3.rel1)
 ################################################################################
 
 -include ../makefile.init
@@ -60,8 +60,8 @@ all: main-build
 main-build: Assignment6_P4.elf secondary-outputs
 
 # Tool invocations
-Assignment6_P4.elf Assignment6_P4.map: $(OBJS) $(USER_OBJS) /home/desd/Documents/Yathi/STMCUBE_Workspace/Assignment6_P4/STM32G431MBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Assignment6_P4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/desd/Documents/Yathi/STMCUBE_Workspace/Assignment6_P4/STM32G431MBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Assignment6_P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Assignment6_P4.elf Assignment6_P4.map: $(OBJS) $(USER_OBJS) /home/desd/Documents/Yathi/STMCUBE_Workspace_1.8/Assignment6_P4/STM32G431MBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Assignment6_P4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/desd/Documents/Yathi/STMCUBE_Workspace_1.8/Assignment6_P4/STM32G431MBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Assignment6_P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

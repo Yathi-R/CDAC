@@ -92,14 +92,19 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   while (1)
   {
+	  //if button 1 is pressed, turns ON Green LED and Turns OFF Red LED
 	  if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7) == 0){
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 0);
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 1);
-	  }else if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7) == 1){
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 0);
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 1);
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 0); //Turns ON Green LED
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 1); //Turns OFF RED LED
+	  }
+
+	  //if button 1 is not pressed, turns OFF Green LED and Turns ON Red LED
+	  else if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7) == 1){
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 0); //Turns ON Red LED
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 1); //Turns OFF Green LED
 	  }
 
     /* USER CODE END WHILE */
@@ -157,8 +162,8 @@ void SystemClock_Config(void)
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-/* USER CODE BEGIN MX_GPIO_Init_1 */
-/* USER CODE END MX_GPIO_Init_1 */
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
+  /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -180,8 +185,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-/* USER CODE BEGIN MX_GPIO_Init_2 */
-/* USER CODE END MX_GPIO_Init_2 */
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
+  /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */

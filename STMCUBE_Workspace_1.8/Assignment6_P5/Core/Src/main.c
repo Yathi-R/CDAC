@@ -90,8 +90,14 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+
+  //initializing brightness (Highest number, lower the LED brightness)
   uint16_t brightness = 65535;
+
+  //Starts PWM with TIM2 channel 4
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
+
+  //Sets PWM with value of brightness (default LED OFF)
   __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness);
   /* USER CODE END 2 */
 
@@ -99,28 +105,39 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if((HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7)) == 0) {
+	  //each press of a pushbutton 1 increases LED brightness
+	  if((HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7)) == 0) //checks if button 1 is pressed
+	  {
+		  //condition to check and limit MAX brightness
 		  if (brightness >10000){
-			  brightness -= 10000;
-			  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness);
+			  brightness -= 10000; // Increases LED brightness
+			  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness); // Sets LED brightness
 		  }
+		  // Sets MAX brightness
 		  else{
 			  brightness = 0;
 			  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness);
 		  }
 	  }
-	  if((HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6)) == 0){
+
+	  //each press of a pushbutton 2 decreases LED brightness.
+	  if((HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6)) == 0) //checks if button 2 is pressed
+	  {
+		  //condition to check and limit Lowest brightness
 		  if(brightness < 55535){
-			  brightness += 10000;
-			  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness);
+			  brightness += 10000; //Decreases LED brightness
+			  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness); //Sets LED brightness
 		  }
+
+		  // Sets Lowest brightness
 		  else{
 			  brightness = 65535;
 			  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, brightness);
 
 		  }
 	  }
-	  HAL_Delay(500);
+
+	  HAL_Delay(500); //Delay of 0.5 Sec
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

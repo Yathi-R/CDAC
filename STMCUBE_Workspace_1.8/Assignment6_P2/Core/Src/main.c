@@ -87,35 +87,47 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+
+  //variable to store button pressed 1 or 2
   uint8_t key_state;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  //long press the key to change speed
+	  //long press buttons
+
+	 //checks if button 1 is pressed and assign 1 to Key state
 	  if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7) == 0){
 		  key_state = 1;
 
 	  }
+
+	  //checks if button 2 is pressed and assign 2 to Key state
 	  else if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == 0 ){
 		  key_state = 2;
 	  }
+
+	  //Toggling led based on button pressed using switch
 	  switch (key_state){
+
+	  //if button 1 is pressed, toggles both led with 1 sec delay
 	  case 1:
 	  		 HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1 | GPIO_PIN_2);
 	  		 HAL_Delay(1000);
 	  		 break;
 
+	  //if button 2 is pressed, toggles both led with 0.5 sec delay
 	  case 2:
 	  		 HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1 | GPIO_PIN_2);
 	  		 HAL_Delay(500);
 	  		 break;
+
 	  default:
 		  break;
 	  }
-
 
     /* USER CODE END WHILE */
 
